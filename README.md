@@ -4,7 +4,7 @@ Removed the robots, just a drawing lab. I'm working on using the script to creat
 
 ## Removing Stuff
 ---
-I have been stripping away as much html as I can, and now build the elements in javascript. There is a lot of mess in the `ids.js` (so named because I keep the globals there - the id's). I'm not sure how to deal with the fact that you can't have references to things that aren't made later (like html elements that you will build later in the program), so until I learn more, I keep those vars as the return lines of functions. It's a cheesy workaround, but it's what I can do now. Meanwhile, I've replaced all the 'monitor' divs and the canvas divs (the slider controls).
+I have been stripping away as much html as I can, and now build the elements in javascript. There is a lot of mess in the `ids.js` (so named because I keep the globals there - the id's). I'm not sure how to deal with the fact that you can't have references to things that aren't made until later (like html elements that you will build later in the program), so until I learn more, I keep those vars as the return lines of functions. It's a cheesy workaround, but it's what I can do now. Meanwhile, I've replaced all the 'monitor' divs and the canvas divs (the slider controls).
 
 ## Independent Functions
 ---
