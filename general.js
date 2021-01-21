@@ -223,13 +223,18 @@ function toRad(n) {
 const monitors = {
   highlight: function (e) {
     let div = e.target;
+
     switch (div.className) {
-      case "stat-display-key":
-        let bg =
-          e.target.style.border === "1px solid rgb(136, 136, 136)"
-            ? "1px solid gold"
-            : "1px solid rgb(136, 136, 136)";
-        e.target.style.border = bg;
+      case "stat-tag-btn":
+        let parent = div.parentElement.parentElement.parentElement;
+
+        if (parent.style.border === "") {
+          parent.style.border = "2px solid yellow";
+          parent.children[1].childNodes[0].className = "info-value-highlighted"
+        } else {
+          parent.style.border = "";
+          parent.children[1].childNodes[0].className = "info-value"
+        }
         break;
     }
   },
@@ -255,8 +260,7 @@ class ControlPanel {
     };
     this.GRID_INTENSITY = 0;
     // dial levels (animation only)
-    this.dials = [1, 1, 0, 0, 0, 0];
-    this.unused = 0;
+    this.dials = [1, 1, 0, 0, 0, 0, 0, 0, 0, 0];
 
     this.controlsArray = [
       {
@@ -288,30 +292,48 @@ class ControlPanel {
         dial: this.widgets.dial06().elem,
         context: this.widgets.dial06().ctx,
         controllant: this.widgets.dial06().ctrl,
-      },      
-      // {
-      //   dial: this.widgets.dial07().elem,
-      //   context: this.widgets.dial07().ctx,
-      //   controllant: this.widgets.dial07().ctrl,
-      // },
+      },
+      {
+        dial: this.widgets.dial07().elem,
+        context: this.widgets.dial07().ctx,
+        controllant: this.widgets.dial07().ctrl,
+      },
+      {
+        dial: this.widgets.dial08().elem,
+        context: this.widgets.dial08().ctx,
+        controllant: this.widgets.dial08().ctrl,
+      },
+      {
+        dial: this.widgets.dial09().elem,
+        context: this.widgets.dial09().ctx,
+        controllant: this.widgets.dial09().ctrl,
+      },
+      {
+        dial: this.widgets.dial010().elem,
+        context: this.widgets.dial010().ctx,
+        controllant: this.widgets.dial010().ctrl,
+      },
     ];
   }
 
   events = (e) => {
-    let dial = Number(e.target.getAttribute('data-ctrl')) - 1 ;
-    if(e.target.className === 'control-unit-canvas') {
+    // find the element data tag
+    let dial = Number(e.target.getAttribute("data-ctrl")) - 1;
+    // adjust the level (animation only)
+    if (e.target.className === "control-unit-canvas") {
       this.dials[dial] = this.dialLevel([dial], e.deltaY);
+      this.draw();
     }
+    // perform the task associated with dial
     switch (e.target.id) {
       case "dial01":
-        this.widgets.dial01().gridIntensity(e);        
+        this.widgets.dial01().gridIntensity(e);
         break;
       case "dial02":
         this.widgets.dial02().gridHighlightIntensity(e);
         break;
       case "dial03":
         break;
-      
     }
   };
 
@@ -368,4 +390,47 @@ class ControlPanel {
       );
     });
   };
+}
+
+function buildMonitors() {
+  function monitor(a) {
+    return `
+  <div class="stat-display">
+  <div class="stat-display-key" id="stat-display-key${Number(a) + 1}">
+    <div class="stat-display-tag" id="stat-display-tag"><button class="stat-tag-btn">${
+      Number(a) + 1
+    }</button></div>
+    <div class="stat-display-legend">target bearing</div>
+  </div>
+  <div class="stat-display-info" id="stat-display-info${
+    Number(a) + 1
+  }"><span class="info-value">1.556</span><span class="info-units">radians</span></div>
+</div>
+  `;
+  }
+  for (let i = 0; i < 20; i++) {
+    logPanel.innerHTML += monitor([i]);
+  }
+}
+
+
+
+function buildControls() {
+  function controlUnit(a) {
+    return `
+    <div class="control-unit">
+      <div class="control-legend">${controlPanelWidgetsNames[Number(a)]}</div>
+      <canvas
+        height="126"
+        width="38"
+        class="control-unit-canvas"
+        id="dial0${Number(a) + 1}"
+        data-ctrl="${Number(a) + 1}"
+      ></canvas>
+    </div>
+  `
+  } 
+  for(let i = 0; i < 10; i ++ ) {
+    controls.innerHTML += controlUnit([i])
+  }
 }

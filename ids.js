@@ -42,6 +42,7 @@ const sdKey13 = document.getElementById("stat-display-key13");
 const sdInfo13 = document.getElementById("stat-display-info13");
 
 const logPanel = document.querySelector("#log-panel");
+const controlDiv = document.querySelector("#controls");
 
 const log = console.log;
 
@@ -56,11 +57,6 @@ let GRID_BG_COLOR = "white";
 let GRID_CL_COLOR = "#f00";
 let GRID_LEGEND_COLOR = "#00f";
 
-// control panel
-// const dial01GridIntensity = document.querySelector("#dial01");
-// const dial02GridHighlightIntenstiy = document.querySelector("#dial02");
-// const dial03 = document.querySelector("#dial03");
-
 let controlPanel;
 
 let controlPanelWidgets = {
@@ -71,12 +67,11 @@ let controlPanelWidgets = {
         return controlPanel.dials[0];
       },
       ctx: document.querySelector("#dial01").getContext("2d"),
-      name: () => {
-        elem.innerHTML = "foo";
-        return "GRID";
-      },
       gridIntensity: (e) => {
-        if (controlPanel.GRID_INTENSITY <= 1 && controlPanel.GRID_INTENSITY >= 0) {
+        if (
+          controlPanel.GRID_INTENSITY <= 1 &&
+          controlPanel.GRID_INTENSITY >= 0
+        ) {
           let setting = e.deltaY / 1000;
           controlPanel.GRID_INTENSITY += setting;
           // truncate zeroes and prevent over-adjust
@@ -87,7 +82,7 @@ let controlPanelWidgets = {
             controlPanel.GRID_INTENSITY = 1;
           }
         }
-      }
+      },
     };
   },
   dial02: () => {
@@ -98,7 +93,10 @@ let controlPanelWidgets = {
       },
       ctx: document.querySelector("#dial02").getContext("2d"),
       gridHighlightIntensity: (e) => {
-        if (controlPanel.GRID_HL_COLOR.a <= 1 && controlPanel.GRID_HL_COLOR.a >= 0) {
+        if (
+          controlPanel.GRID_HL_COLOR.a <= 1 &&
+          controlPanel.GRID_HL_COLOR.a >= 0
+        ) {
           let setting = e.deltaY / 1000;
           controlPanel.GRID_HL_COLOR.a -= setting;
           // truncate zeroes and prevent over-adjust
@@ -109,7 +107,7 @@ let controlPanelWidgets = {
             controlPanel.GRID_HL_COLOR.a = 1;
           }
         }
-      }
+      },
     };
   },
   dial03: () => {
@@ -148,27 +146,47 @@ let controlPanelWidgets = {
       },
     };
   },
-  // dial07: () => {
-  //   return {
-  //     elem: dial07,
-  //     ctx: dial07.getContext("2d"),
-  //     ctrl: () => {
-  //       return controlPanel.dials[6];
-  //     },
-  //     html: `
-  //     <div class="control-unit">
-  //       <div class="control-legend">7</div>
-  //       <canvas
-  //         height="126"
-  //         width="38"
-  //         class="control-unit-canvas"
-  //         id="dial07"
-  //         data-ctrl='7'
-  //       ></canvas>
-  //     </div>
-  //     `,
-  //   };
-  // },
+  dial07: () => {
+    return {
+      elem: dial07,
+      ctx: dial07.getContext("2d"),
+      ctrl: () => {
+        return controlPanel.dials[6];
+      },
+    };
+  },
+  dial08: () => {
+    return {
+      elem: dial08,
+      ctx: dial08.getContext("2d"),
+      ctrl: () => {
+        return controlPanel.dials[7];
+      },
+    };
+  },
+  dial09: () => {
+    return {
+      elem: dial09,
+      ctx: dial09.getContext("2d"),
+      ctrl: () => {
+        return controlPanel.dials[8];
+      },
+    };
+  },
+  dial010: () => {
+    return {
+      elem: dial010,
+      ctx: dial010.getContext("2d"),
+      ctrl: () => {
+        return controlPanel.dials[9];
+      },
+    };
+  },
 };
+
+controlPanelWidgetsNames = [
+  'GRID', 'GRIDHL', '03', '04', '05', '06', '07',
+  '08', '09', '10'
+]
 
 let drawObjects = [];
