@@ -1,5 +1,6 @@
 # Canvas Lab II
  
+ [Page Preview](https://klins75.github.io/canvasLab/). 
 Removed the robots, just a drawing lab. I'm working on using the script to create the interface, including forms for creating new controls and programming them to track particular variables in the code.
 
 ## Removing Stuff
