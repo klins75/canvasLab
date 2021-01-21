@@ -120,106 +120,6 @@ function toRad(n) {
   return result;
 }
 
-// const controls = {
-//   GRID_HL_COLOR: {
-//     r: 0,
-//     g: 0,
-//     b: 255,
-//     a: 1,
-//   },
-
-//   GRID_INDICATOR_COLOR: {
-//     r: 0,
-//     g: 128,
-//     b: 255,
-//     a: 1,
-//   },
-
-//   GRID_INTENSITY: 0,
-
-//   controlsArray: function () {
-//     let x = [
-//       {
-//         dial: dial01GridIntensity,
-//         context: dial01ctx,
-//         controllant: 1 - controls.GRID_INTENSITY,
-//       },
-//       {
-//         dial: dial02GridHighlightIntenstiy,
-//         context: dial02ctx,
-//         controllant: controls.GRID_HL_COLOR.a,
-//       },
-//     ];
-//     return x;
-//   },
-
-//   gridIntensity: function (e) {
-//     if (controls.GRID_INTENSITY <= 1 && controls.GRID_INTENSITY >= 0) {
-//       let setting = e.deltaY / 1000;
-//       controls.GRID_INTENSITY += setting;
-//       // truncate zeroes and prevent over-adjust
-//       if (controls.GRID_INTENSITY < 0) {
-//         controls.GRID_INTENSITY = 0;
-//       }
-//       if (controls.GRID_INTENSITY > 1) {
-//         controls.GRID_INTENSITY = 1;
-//       }
-//     }
-//   },
-
-//   gridHighlightIntensity: function (e) {
-//     if (controls.GRID_HL_COLOR.a <= 1 && controls.GRID_HL_COLOR.a >= 0) {
-//       let setting = e.deltaY / 1000;
-//       controls.GRID_HL_COLOR.a -= setting;
-//       // truncate zeroes and prevent over-adjust
-//       if (controls.GRID_HL_COLOR.a < 0) {
-//         controls.GRID_HL_COLOR.a = 0;
-//       }
-//       if (controls.GRID_HL_COLOR.a > 1) {
-//         controls.GRID_HL_COLOR.a = 1;
-//       }
-//     }
-//   },
-
-//   draw: function () {
-//     let array = this.controlsArray();
-//     array.forEach((control) => {
-//       drawRect(
-//         0,
-//         0,
-//         control.dial.width,
-//         control.dial.height,
-//         "black",
-//         control.context
-//       );
-//       for (i = 0; i < 10; i++) {
-//         control.context.beginPath();
-//         control.context.moveTo(
-//           control.dial.width / 3,
-//           ((i + 1) * control.dial.height) / 10
-//         );
-//         control.context.lineTo(
-//           (2 * control.dial.width) / 3,
-//           ((i + 1) * control.dial.height) / 10
-//         );
-//         control.context.strokeStyle = "white";
-//         control.context.lineWidth = 2;
-//         control.context.stroke();
-//       }
-//       let color = this.GRID_INDICATOR_COLOR;
-//       // dial brightens as it goes to top
-//       color.g = 255 - (1 - control.controllant) * 255;
-
-//       hline(
-//         -control.controllant * control.dial.height + control.dial.height,
-//         rgbaTranslator(color),
-//         6,
-//         control.context
-//       );
-//     });
-//   },
-// };
-
 const monitors = {
   highlight: function (e) {
     let div = e.target;
@@ -408,7 +308,7 @@ function buildMonitors() {
 </div>
   `;
   }
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     logPanel.innerHTML += monitor([i]);
   }
 }
