@@ -18,7 +18,7 @@ function loadEventListeners() {
 // Start test bench
 function startTestBench() {
   // build monitors
-  buildMonitors();
+  // buildMonitors();
   // build controls
   buildControls();
   // instantiate control panel

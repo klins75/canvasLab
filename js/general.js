@@ -130,10 +130,10 @@ const monitors = {
 
         if (parent.style.border === "") {
           parent.style.border = "2px solid yellow";
-          parent.children[1].childNodes[0].className = "info-value-highlighted"
+          parent.children[1].childNodes[0].className = "info-value-highlighted";
         } else {
           parent.style.border = "";
-          parent.children[1].childNodes[0].className = "info-value"
+          parent.children[1].childNodes[0].className = "info-value";
         }
         break;
     }
@@ -158,7 +158,11 @@ class ControlPanel {
       b: 255,
       a: 1,
     };
+
     this.GRID_INTENSITY = 0;
+
+    
+
     // dial levels (animation only)
     this.dials = [1, 1, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -313,8 +317,6 @@ function buildMonitors() {
   }
 }
 
-
-
 function buildControls() {
   function controlUnit(a) {
     return `
@@ -328,9 +330,9 @@ function buildControls() {
         data-ctrl="${Number(a) + 1}"
       ></canvas>
     </div>
-  `
-  } 
-  for(let i = 0; i < 10; i ++ ) {
-    controls.innerHTML += controlUnit([i])
+  `;
+  }
+  for (let i = 0; i < 10; i++) {
+    controls.innerHTML += controlUnit([i]);
   }
 }
